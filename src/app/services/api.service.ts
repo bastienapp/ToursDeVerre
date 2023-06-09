@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { first, map } from 'rxjs';
+import { first, map, mergeAll } from 'rxjs';
 import { CollectionPoint } from '../models/collection-point.model';
 
 type ApiResponse = {
@@ -57,27 +57,10 @@ export class ApiService {
               record.fields.opening_hours,
               record.fields.postal_address,
             )
-          )[0]
+          )
         ),
+        first(), // ne garde que le premier résultat du tableau (mais le résultat reste un tableau)
+        mergeAll() // fusionne le tableau pour ne faire qu'un seul CollectionPoint
       )
   }
 }
-
-/*
-
-{
-  nhits: number,
-  parameters: object,
-  records: [
-    {
-      datasetid: string,
-      recordid: string,
-      fields: {
-        geo_coordinates: number[],
-        ...
-      }
-    }
-  ]
-}
-
-*/
