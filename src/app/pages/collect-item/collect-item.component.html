@@ -1,0 +1,8 @@
+<div *ngIf="collectionItem">
+  <h3>{{ collectionItem.name }}</h3>
+  <h5>{{ collectionItem.address }}</h5>
+  <p>{{ collectionItem.openingHours }}</p>
+  <p>{{ collectionItem.location | json }}</p>
+  <br />
+  <a routerLink="/">Retour à la liste</a>
+</div>

@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { map } from 'rxjs';
+import { first, map } from 'rxjs';
 import { CollectionPoint } from '../models/collection-point.model';
 
 type ApiResponse = {
@@ -41,6 +41,24 @@ export class ApiService {
             )
           )
         )
+      )
+  }
+
+  findById(recordId: string) {
+    return this.httpClient
+      .get<ApiResponse>(`${this.API_URL}&recordid=${recordId}`)
+      .pipe(
+        map((response: ApiResponse) =>
+          response.records.map((record) =>
+            new CollectionPoint(
+              record.recordid,
+              record.fields.full_name,
+              record.fields.geo_coordinates,
+              record.fields.opening_hours,
+              record.fields.postal_address,
+            )
+          )[0]
+        ),
       )
   }
 }

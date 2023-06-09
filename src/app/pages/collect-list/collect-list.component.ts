@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { CollectionPoint } from 'src/app/models/collection-point.model';
 import { ApiService } from 'src/app/services/api.service';
 
 @Component({
@@ -8,12 +9,16 @@ import { ApiService } from 'src/app/services/api.service';
 })
 export class CollectListComponent implements OnInit {
 
+  collectionList: CollectionPoint[] = [];
+
   constructor(private apiService: ApiService) { }
 
   ngOnInit(): void {
-    this.apiService.findAll()
-      .subscribe((data) => console.log(data))
+    this.getAll();
   }
 
-
+  getAll() {
+    this.apiService.findAll()
+      .subscribe((data) => this.collectionList = data);
+  }
 }

@@ -1,1 +1,5 @@
-<p>collect-list works!</p>
+<ul>
+  <li *ngFor="let collectItem of collectionList">
+    <a [routerLink]="['collect', collectItem.id]">{{ collectItem.address }}</a>
+  </li>
+</ul>
