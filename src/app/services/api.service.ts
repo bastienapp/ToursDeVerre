@@ -20,9 +20,9 @@ type ApiResponse = {
 })
 export class ApiService {
 
-  readonly MAX_ROW = 800;
+  private readonly MAX_ROW = 800;
 
-  readonly API_URL = `https://data.tours-metropole.fr/api/records/1.0/search/?dataset=equipements-points-apport-volontaire-verre-tours-metropole-val-de-loire&rows=${this.MAX_ROW}`;
+  private readonly API_URL = `https://data.tours-metropole.fr/api/records/1.0/search/?dataset=equipements-points-apport-volontaire-verre-tours-metropole-val-de-loire&rows=${this.MAX_ROW}`;
 
   constructor(private httpClient: HttpClient) { }
 
